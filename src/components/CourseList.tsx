@@ -1,4 +1,15 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  GestureResponderEvent,
+  GestureResponderHandlers,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 
 const courses = [
@@ -9,9 +20,45 @@ const courses = [
 ];
 
 const CourseList = () => {
+  // Als referentie event handler -> event typen met TypeScript
+  const handlePress = (event: GestureResponderEvent) => {
+    console.log("Er is geklikt op de knop!: ", event.target);
+  };
+
   return (
     <View style={styles.container}>
       <Text>CourseList</Text>
+
+      <Button title="Klik mij (Button)" onPress={handlePress}></Button>
+
+      <TouchableOpacity
+        style={{
+          backgroundColor: "blue",
+          paddingHorizontal: 16,
+          height: 40,
+        }}
+        onPress={(event) => {
+          console.log("Geklikt op de Touchable Opacity: ");
+        }}
+        onLongPress={() => {
+          console.log("Lang geklikt op de Touchable Opacity");
+        }}>
+        <Text style={{ textAlign: "center", color: "white" }}>
+          Klik mij (Touchable Opacity)
+        </Text>
+      </TouchableOpacity>
+
+      <Pressable
+        style={{
+          marginTop: 16,
+          backgroundColor: "blue",
+          paddingHorizontal: 16,
+        }}
+        onPress={() => {
+          console.log("Geklikt op de Pressable!");
+        }}>
+        <Text>Klik mij (Pressable)</Text>
+      </Pressable>
 
       {/* Opgelet met map -> performantie redenen */}
       {/* {courses.map((c) => (
