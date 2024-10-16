@@ -14,6 +14,17 @@ import TextComponent from "./src/components/TextComponent";
 
 // Provider (SafeAreaProvider) -> Context kan gebruiken in mijn app
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { DefaultTheme, PaperProvider } from "react-native-paper";
+import Counter from "./src/components/Counter";
+
+const paperTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    // primary: "#dedede",
+    // secondary: "#ededed",
+  },
+};
 
 export default function App() {
   // return <CourseList />;
@@ -86,7 +97,10 @@ export default function App() {
   return (
     <SafeAreaProvider>
       {/* Context kan maar pas gebruikt worden als child van de Provider */}
-      <TextComponent />
+      <PaperProvider theme={paperTheme}>
+        {/* <TextComponent /> */}
+        <Counter />
+      </PaperProvider>
     </SafeAreaProvider>
   );
 }
