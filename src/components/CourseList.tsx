@@ -11,6 +11,10 @@ import {
   View,
 } from "react-native";
 import React from "react";
+import { Divider } from "react-native-paper";
+
+import MaterialIcon from "@expo/vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
 
 const courses = [
   { courseId: 1, name: "Web 1" },
@@ -20,6 +24,9 @@ const courses = [
 ];
 
 const CourseList = () => {
+  // Hook om te kunnen navigeren
+  const navigation = useNavigation();
+
   // Als referentie event handler -> event typen met TypeScript
   const handlePress = (event: GestureResponderEvent) => {
     console.log("Er is geklikt op de knop!: ", event.target);
@@ -27,11 +34,11 @@ const CourseList = () => {
 
   return (
     <View style={styles.container}>
-      <Text>CourseList</Text>
+      {/* <Text>CourseList</Text> */}
 
-      <Button title="Klik mij (Button)" onPress={handlePress}></Button>
+      {/* <Button title="Klik mij (Button)" onPress={handlePress}></Button> */}
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{
           backgroundColor: "blue",
           paddingHorizontal: 16,
@@ -46,9 +53,9 @@ const CourseList = () => {
         <Text style={{ textAlign: "center", color: "white" }}>
           Klik mij (Touchable Opacity)
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      <Pressable
+      {/* <Pressable
         style={{
           marginTop: 16,
           backgroundColor: "blue",
@@ -58,7 +65,7 @@ const CourseList = () => {
           console.log("Geklikt op de Pressable!");
         }}>
         <Text>Klik mij (Pressable)</Text>
-      </Pressable>
+      </Pressable> */}
 
       {/* Opgelet met map -> performantie redenen */}
       {/* {courses.map((c) => (
@@ -71,14 +78,20 @@ const CourseList = () => {
       <FlatList
         renderItem={({ item, index }) => {
           return (
-            <View style={styles.listView}>
-              <Text>{item.name}</Text>
-            </View>
+            <TouchableOpacity
+              style={styles.listView}
+              onPress={() => {
+                navigation.navigate("DetailsScreen", { course: item });
+              }}>
+              <Text style={{ fontSize: 18, fontWeight: 700 }}>{item.name}</Text>
+              <MaterialIcon name="chevron-right" size={24} color="#dedede" />
+            </TouchableOpacity>
           );
         }}
         data={courses}
         // KeyExtractor -> key moet van het type string zijn
         keyExtractor={(item) => item.courseId.toString()}
+        ItemSeparatorComponent={() => <Divider />}
       />
     </View>
   );
@@ -88,10 +101,13 @@ export default CourseList;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 56,
-    paddingHorizontal: 16,
+    flex: 4,
   },
   listView: {
-    marginVertical: 500,
+    height: 50,
+    padding: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });

@@ -8,7 +8,6 @@ import {
   View,
 } from "react-native";
 
-import icon from "./assets/icon.png";
 import CourseList from "./src/components/CourseList";
 import TextComponent from "./src/components/TextComponent";
 
@@ -16,6 +15,9 @@ import TextComponent from "./src/components/TextComponent";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { DefaultTheme, PaperProvider } from "react-native-paper";
 import Counter from "./src/components/Counter";
+import StackNavigator from "./src/navigation/StackNavigator";
+import { NavigationContainer } from "@react-navigation/native";
+import TabNavigator from "./src/navigation/TabNavigator";
 
 const paperTheme = {
   ...DefaultTheme,
@@ -94,14 +96,23 @@ export default function App() {
   //   </View>
   // );
 
+  // return (
+  //   <SafeAreaProvider>
+  //     {/* Context kan maar pas gebruikt worden als child van de Provider */}
+  //
+  //       {/* <TextComponent /> */}
+  //       <Counter />
+  //     </PaperProvider>
+  //   </SafeAreaProvider>
+  // );
+
   return (
-    <SafeAreaProvider>
-      {/* Context kan maar pas gebruikt worden als child van de Provider */}
-      <PaperProvider theme={paperTheme}>
-        {/* <TextComponent /> */}
-        <Counter />
-      </PaperProvider>
-    </SafeAreaProvider>
+    <PaperProvider theme={paperTheme}>
+      <NavigationContainer>
+        {/* <StackNavigator /> */}
+        <TabNavigator />
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 
