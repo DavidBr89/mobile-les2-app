@@ -20,6 +20,7 @@ import Counter from "./src/components/Counter";
 import StackNavigator from "./src/navigation/StackNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./src/navigation/TabNavigator";
+import DarkModeContextProvider from "./src/contexts/DarkModeContext";
 
 const paperTheme = {
   ...DefaultTheme,
@@ -112,7 +113,9 @@ export default function App() {
     <PaperProvider theme={paperTheme}>
       <NavigationContainer>
         {/* <StackNavigator /> */}
-        <TabNavigator />
+        <DarkModeContextProvider>
+          <TabNavigator />
+        </DarkModeContextProvider>
       </NavigationContainer>
     </PaperProvider>
   );

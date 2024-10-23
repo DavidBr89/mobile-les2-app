@@ -2,6 +2,8 @@
 // Importeren van uw NavigatorProps -> StackNavigator/TabNavigator/DrawerNavigator
 
 import { StackScreenProps } from "@react-navigation/stack";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { DrawerScreenProps } from "@react-navigation/drawer"; 
 
 // Per Navigator type -> ParamsList type maken -> Stack/Drawer/Tab
 export type CoursesStackParamsList = {
@@ -11,7 +13,22 @@ export type CoursesStackParamsList = {
     AddCourseScreen: undefined,
 }
 
+export type TabParamsList = {
+    // undefined als type -> omdat er in dit scherm geen params binnen komen
+    TabHomeScreen: undefined,
+    SettingsScreen: undefined,
+}
+
+export type DrawerParamsList = {
+    // undefined als type -> omdat er in dit scherm geen params binnen komen
+    DrawerSettings: undefined,
+    AboutScreen: undefined
+}
+
+// Typen van uw useNavigation en uw useRoute hook
 export type CourseScreenProps<T extends keyof CoursesStackParamsList> = StackScreenProps<CoursesStackParamsList, T>;
+export type TabProps<T extends keyof TabParamsList> = BottomTabScreenProps<TabParamsList, T>;
+export type DrawerProps<T extends keyof DrawerParamsList> = DrawerScreenProps<DrawerParamsList, T>;
 
 
 declare global {

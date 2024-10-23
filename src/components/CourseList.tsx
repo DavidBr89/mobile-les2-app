@@ -10,11 +10,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Divider } from "react-native-paper";
 
 import MaterialIcon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
+import { CourseScreenProps } from "../navigation/types";
+
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useDarkMode } from "../contexts/DarkModeContext";
 
 const courses = [
   { courseId: 1, name: "Web 1" },
@@ -25,15 +29,22 @@ const courses = [
 
 const CourseList = () => {
   // Hook om te kunnen navigeren
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<CourseScreenProps<"HomeScreen">["navigation"]>();
 
   // Als referentie event handler -> event typen met TypeScript
   const handlePress = (event: GestureResponderEvent) => {
     console.log("Er is geklikt op de knop!: ", event.target);
   };
 
+  const { left, right } = useSafeAreaInsets();
+
+  // const { isDarkMode } = useContext(DarkModeContext);
+  const { isDarkMode } = useDarkMode();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={{ ...styles.container, paddingLeft: left, paddingRight: right }}>
       {/* <Text>CourseList</Text> */}
 
       {/* <Button title="Klik mij (Button)" onPress={handlePress}></Button> */}
@@ -101,7 +112,7 @@ export default CourseList;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 4,
+    flex: 1,
   },
   listView: {
     height: 50,

@@ -8,12 +8,14 @@ import HomeScreen from "../screens/HomeScreen";
 import DetailsScreen from "../screens/DetailsScreen";
 import { useNavigation } from "@react-navigation/native";
 import AddCourseScreen from "../screens/AddCourseScreen";
+import { CourseScreenProps } from "./types";
 
 // Stap 1: Een nieuwe instantie krijgen van een stackNavigator
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<CourseScreenProps<"HomeScreen">["navigation"]>();
 
   return (
     <Stack.Navigator
@@ -40,6 +42,7 @@ const StackNavigator = () => {
       <Stack.Screen
         name="DetailsScreen"
         component={DetailsScreen}
+        // TODO: Types route -> params
         options={({ route: { params } }) => ({ title: params.course.name })}
       />
       <Stack.Screen name="AddCourseScreen" component={AddCourseScreen} />
