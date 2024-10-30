@@ -2,22 +2,25 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Counter from "../components/Counter";
 import CourseList from "../components/CourseList";
-import { Divider } from "react-native-paper";
+import { Button, Divider } from "react-native-paper";
+import DarkModeView from "../components/DarkModeView";
+import DarkModeContextProvider, {
+  useDarkMode,
+} from "../contexts/DarkModeContext";
 
 const HomeScreen = () => {
+  const { toggleDarkMode } = useDarkMode();
+
   return (
-    <View style={styles.container}>
+    <DarkModeView>
       <Counter />
       <Divider />
+      <Button onPress={toggleDarkMode}>Toggle dark mode</Button>
       <CourseList />
-    </View>
+    </DarkModeView>
   );
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+const styles = StyleSheet.create({});

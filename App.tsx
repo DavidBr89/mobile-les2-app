@@ -21,6 +21,8 @@ import StackNavigator from "./src/navigation/StackNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./src/navigation/TabNavigator";
 import DarkModeContextProvider from "./src/contexts/DarkModeContext";
+import ParkingsTabNavigator from "./src/navigation/ParkingsTabNavigator";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const paperTheme = {
   ...DefaultTheme,
@@ -109,13 +111,18 @@ export default function App() {
   //   </SafeAreaProvider>
   // );
 
+  const queryClient = new QueryClient();
+
   return (
     <PaperProvider theme={paperTheme}>
       <NavigationContainer>
         {/* <StackNavigator /> */}
-        <DarkModeContextProvider>
-          <TabNavigator />
-        </DarkModeContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <DarkModeContextProvider>
+            {/* <TabNavigator /> */}
+            <ParkingsTabNavigator />
+          </DarkModeContextProvider>
+        </QueryClientProvider>
       </NavigationContainer>
     </PaperProvider>
   );

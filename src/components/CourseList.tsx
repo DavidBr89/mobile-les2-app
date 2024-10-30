@@ -42,9 +42,27 @@ const CourseList = () => {
   // const { isDarkMode } = useContext(DarkModeContext);
   const { isDarkMode } = useDarkMode();
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: isDarkMode ? "black" : "white",
+    },
+    listView: {
+      height: 50,
+      padding: 16,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+  });
+
   return (
     <View
-      style={{ ...styles.container, paddingLeft: left, paddingRight: right }}>
+      style={{
+        ...styles.container,
+        paddingLeft: left,
+        paddingRight: right,
+      }}>
       {/* <Text>CourseList</Text> */}
 
       {/* <Button title="Klik mij (Button)" onPress={handlePress}></Button> */}
@@ -87,6 +105,7 @@ const CourseList = () => {
 
       {/* Als we met lijsten/arrays van data gaan werken -> FlatList */}
       <FlatList
+        style={{}}
         renderItem={({ item, index }) => {
           return (
             <TouchableOpacity
@@ -94,7 +113,14 @@ const CourseList = () => {
               onPress={() => {
                 navigation.navigate("DetailsScreen", { course: item });
               }}>
-              <Text style={{ fontSize: 18, fontWeight: 700 }}>{item.name}</Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: isDarkMode ? "white" : "black",
+                }}>
+                {item.name}
+              </Text>
               <MaterialIcon name="chevron-right" size={24} color="#dedede" />
             </TouchableOpacity>
           );
@@ -109,16 +135,3 @@ const CourseList = () => {
 };
 
 export default CourseList;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  listView: {
-    height: 50,
-    padding: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-});
