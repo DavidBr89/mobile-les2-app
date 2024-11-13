@@ -118,7 +118,7 @@ const ParkingsScreen = () => {
       <FlatList
         data={data?.data.results}
         renderItem={({ item }) => {
-          return <Text>{item.name}</Text>;
+          return <Text style={styles.parkingTitle}>{item.name}</Text>;
         }}
         keyExtractor={(item) => item.id}
         // Pull to refresh -> Naar beneden trekken om uw data opnieuw op te halen
@@ -134,5 +134,8 @@ export default ParkingsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  parkingTitle: {
+    fontFamily: "SourGummy",
   },
 });

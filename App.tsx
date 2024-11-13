@@ -24,6 +24,10 @@ import DarkModeContextProvider from "./src/contexts/DarkModeContext";
 import ParkingsTabNavigator from "./src/navigation/ParkingsTabNavigator";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
+import { useEffect } from "react";
+
 const paperTheme = {
   ...DefaultTheme,
   colors: {
@@ -32,6 +36,9 @@ const paperTheme = {
     // secondary: "#ededed",
   },
 };
+
+// Dit is om uw SplashScreen tegen te houden
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   // return <CourseList />;
@@ -112,6 +119,20 @@ export default function App() {
   // );
 
   const queryClient = new QueryClient();
+
+  const [isLoaded, error] = useFonts({
+    SourGummy: require("./assets/fonts/SourGummy.ttf"),
+  });
+
+  useEffect(() => {
+    if (isLoaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [isLoaded, error]);
+
+  if (!isLoaded && !error) {
+    return null;
+  }
 
   return (
     <PaperProvider theme={paperTheme}>
