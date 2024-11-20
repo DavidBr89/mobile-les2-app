@@ -3,6 +3,8 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import SettingsScreen from "../screens/SettingsScreen";
 import AboutScreen from "../screens/AboutScreen";
+import CameraScreen from "../screens/CameraScreen";
+import LocationScreen from "../screens/LocationScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -29,6 +31,8 @@ const DrawerNavigator = () => {
           title: "About",
         }}
       />
+      <Drawer.Screen component={CameraScreen} name="Camera" />
+      <Drawer.Screen component={LocationScreen} name="Locatie" />
     </Drawer.Navigator>
   );
 };

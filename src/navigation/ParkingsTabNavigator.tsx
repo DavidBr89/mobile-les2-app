@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ParkingsScreen from "../screens/ParkingsScreen";
 import ParkingsMapScreen from "../screens/ParkingsMapScreen";
 import AddCourseScreen from "../screens/AddCourseScreen";
+import DrawerNavigator from "./DrawerNavigator";
 
 const ParkingsTab = createBottomTabNavigator();
 
@@ -17,6 +18,13 @@ const ParkingsTabNavigator = () => {
       <ParkingsTab.Screen name="ParkingsList" component={ParkingsScreen} />
       <ParkingsTab.Screen name="ParkingsMap" component={ParkingsMapScreen} />
       <ParkingsTab.Screen name="AddCourseScreen" component={AddCourseScreen} />
+      <ParkingsTab.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="NativeDrawer"
+        component={DrawerNavigator}
+      />
     </ParkingsTab.Navigator>
   );
 };

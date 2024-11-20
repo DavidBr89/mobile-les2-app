@@ -24,7 +24,15 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Deze app $(PRODUCT_NAME) gebruikt de camera om een foto te nemen.",
+          // "microphonePermission": "Deze app $(PRODUCT_NAME) gebruikt de microfoon om een video op te nemen.",
+          "recordAudioAndroid": true
+        }
+      ]
     ]
   }
 }
