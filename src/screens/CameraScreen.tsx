@@ -62,7 +62,7 @@ const CameraScreen = () => {
       {isFocused && (
         <CameraView
           ref={cameraRef}
-          facing="front"
+          facing="back"
           onCameraReady={() => {
             console.log("Camera is ready");
             setIsCameraReady(true);
