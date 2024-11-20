@@ -8,4 +8,5 @@ interface Parking {
     lon: number;
     lat: number;
   };
+  urllinkaddress: string;
 }

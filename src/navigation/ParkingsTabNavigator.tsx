@@ -5,6 +5,7 @@ import ParkingsScreen from "../screens/ParkingsScreen";
 import ParkingsMapScreen from "../screens/ParkingsMapScreen";
 import AddCourseScreen from "../screens/AddCourseScreen";
 import DrawerNavigator from "./DrawerNavigator";
+import ParkingsStackNavigator from "./ParkingsStackNavigator";
 
 const ParkingsTab = createBottomTabNavigator();
 
@@ -15,7 +16,11 @@ const ParkingsTabNavigator = () => {
         headerTitleStyle: { fontFamily: "SourGummy" },
         tabBarLabelStyle: { fontFamily: "SourGummy" },
       }}>
-      <ParkingsTab.Screen name="ParkingsList" component={ParkingsScreen} />
+      <ParkingsTab.Screen
+        options={{ headerShown: false }}
+        name="ParkingsList"
+        component={ParkingsStackNavigator}
+      />
       <ParkingsTab.Screen name="ParkingsMap" component={ParkingsMapScreen} />
       <ParkingsTab.Screen name="AddCourseScreen" component={AddCourseScreen} />
       <ParkingsTab.Screen

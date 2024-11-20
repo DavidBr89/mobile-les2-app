@@ -4,6 +4,7 @@ import {
   FlatList,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -11,6 +12,8 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { ParkingsScreenProps } from "../navigation/types";
 
 const ParkingsScreen = () => {
   //   const [parkings, setParkings] = useState<Parking[]>([]);
@@ -55,6 +58,9 @@ const ParkingsScreen = () => {
   //   //   React Query
 
   const queryClient = useQueryClient();
+
+  const navigation =
+    useNavigation<ParkingsScreenProps<"parkings">["navigation"]>();
 
   //   GET Request
   const { data, error, isLoading, isError, refetch, dataUpdatedAt } = useQuery({
@@ -118,7 +124,17 @@ const ParkingsScreen = () => {
       <FlatList
         data={data?.data.results}
         renderItem={({ item }) => {
-          return <Text style={styles.parkingTitle}>{item.name}</Text>;
+          return (
+            <TouchableOpacity
+              style={{ padding: 16 }}
+              onPress={() => {
+                navigation.navigate("parkingsweb", {
+                  url: item.urllinkaddress,
+                });
+              }}>
+              <Text style={styles.parkingTitle}>{item.name}</Text>
+            </TouchableOpacity>
+          );
         }}
         keyExtractor={(item) => item.id}
         // Pull to refresh -> Naar beneden trekken om uw data opnieuw op te halen

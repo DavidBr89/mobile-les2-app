@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 
 import MapView, { Marker } from "react-native-maps";
 import { useQuery } from "@tanstack/react-query";
@@ -17,8 +17,27 @@ const ParkingsMapScreen = () => {
     },
   });
 
+  const mapRef = useRef<MapView>(null);
+
   return (
-    <MapView style={styles.container}>
+    <MapView
+      ref={mapRef}
+      style={styles.container}
+      showsUserLocation={true}
+      onUserLocationChange={(event) => {
+        const coords = event.nativeEvent.coordinate;
+        if (coords) {
+          mapRef.current?.animateCamera(
+            {
+              center: {
+                latitude: coords.latitude,
+                longitude: coords.longitude,
+              },
+            },
+            { duration: 500 }
+          );
+        }
+      }}>
       {data?.data.results.map((p) => (
         <Marker
           key={p.id}
