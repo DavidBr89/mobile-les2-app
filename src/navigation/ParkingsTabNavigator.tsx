@@ -6,6 +6,7 @@ import ParkingsMapScreen from "../screens/ParkingsMapScreen";
 import AddCourseScreen from "../screens/AddCourseScreen";
 import DrawerNavigator from "./DrawerNavigator";
 import ParkingsStackNavigator from "./ParkingsStackNavigator";
+import FavoritesScreen from "../screens/FavoritesScreen";
 
 const ParkingsTab = createBottomTabNavigator();
 
@@ -22,6 +23,7 @@ const ParkingsTabNavigator = () => {
         component={ParkingsStackNavigator}
       />
       <ParkingsTab.Screen name="ParkingsMap" component={ParkingsMapScreen} />
+      <ParkingsTab.Screen name="FavoritesScreen" component={FavoritesScreen} />
       <ParkingsTab.Screen name="AddCourseScreen" component={AddCourseScreen} />
       <ParkingsTab.Screen
         options={{

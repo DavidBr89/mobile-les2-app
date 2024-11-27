@@ -27,6 +27,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "./src/store";
 
 const paperTheme = {
   ...DefaultTheme,
@@ -135,17 +137,20 @@ export default function App() {
   }
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <NavigationContainer>
-        {/* <StackNavigator /> */}
-        <QueryClientProvider client={queryClient}>
-          <DarkModeContextProvider>
-            {/* <TabNavigator /> */}
-            <ParkingsTabNavigator />
-          </DarkModeContextProvider>
-        </QueryClientProvider>
-      </NavigationContainer>
-    </PaperProvider>
+    // REDUX Provider
+    <Provider store={store}>
+      <PaperProvider theme={paperTheme}>
+        <NavigationContainer>
+          {/* <StackNavigator /> */}
+          <QueryClientProvider client={queryClient}>
+            <DarkModeContextProvider>
+              {/* <TabNavigator /> */}
+              <ParkingsTabNavigator />
+            </DarkModeContextProvider>
+          </QueryClientProvider>
+        </NavigationContainer>
+      </PaperProvider>
+    </Provider>
   );
 }
 

@@ -11,9 +11,12 @@ import React, { useEffect, useState } from "react";
 
 import Axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button } from "react-native-paper";
+import { Button, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { ParkingsScreenProps } from "../navigation/types";
+import { addFavorite } from "../store/favorites/slice";
+import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 
 const ParkingsScreen = () => {
   //   const [parkings, setParkings] = useState<Parking[]>([]);
@@ -56,6 +59,10 @@ const ParkingsScreen = () => {
   //     }
   //   };
   //   //   React Query
+
+  // REDUX DISPATCH
+  const dispatch = useAppDispatch();
+  const favoritesState = useAppSelector((state) => state);
 
   const queryClient = useQueryClient();
 
@@ -126,13 +133,37 @@ const ParkingsScreen = () => {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              style={{ padding: 16 }}
+              style={{
+                padding: 16,
+              }}
               onPress={() => {
                 navigation.navigate("parkingsweb", {
                   url: item.urllinkaddress,
                 });
               }}>
-              <Text style={styles.parkingTitle}>{item.name}</Text>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}>
+                <Text style={styles.parkingTitle}>{item.name}</Text>
+                <IconButton
+                  onPress={(event) => {
+                    // Om onze action te gaan dispatchen naar onze store
+                    dispatch(addFavorite(item));
+
+                    // Stopt event bubbling
+                    event.stopPropagation();
+                  }}
+                  icon={`${
+                    favoritesState.some((p) => p.id === item.id)
+                      ? "star"
+                      : "star-outline"
+                  }`}
+                />
+              </View>
             </TouchableOpacity>
           );
         }}
