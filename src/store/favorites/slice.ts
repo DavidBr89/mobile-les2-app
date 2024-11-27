@@ -9,12 +9,6 @@ const favoritesSlice = createSlice({
     reducers: {
         // Add ACTION -> Functie is eigenlijk een reducer
         addFavorite: (currentState, action: PayloadAction<Parking>) => {
-
-            // Immer package => Moet in principe uw state niet meer immutable aangepakt worden
-            // currentState.push(action.payload);
-            // Immutable manier
-
-            // TODO: Checken ofdat de parking er al inzit eventueel om geen dubbels te hebben
             return [...currentState, action.payload];
         },
         // Remove ACTION

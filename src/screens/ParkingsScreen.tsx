@@ -62,7 +62,7 @@ const ParkingsScreen = () => {
 
   // REDUX DISPATCH
   const dispatch = useAppDispatch();
-  const favoritesState = useAppSelector((state) => state);
+  const favoritesState = useAppSelector((state) => state.favorites);
 
   const queryClient = useQueryClient();
 

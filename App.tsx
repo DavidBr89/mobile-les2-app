@@ -28,7 +28,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import { Provider } from "react-redux";
-import { store } from "./src/store";
+import { persistor, store } from "./src/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const paperTheme = {
   ...DefaultTheme,
@@ -139,17 +140,19 @@ export default function App() {
   return (
     // REDUX Provider
     <Provider store={store}>
-      <PaperProvider theme={paperTheme}>
-        <NavigationContainer>
-          {/* <StackNavigator /> */}
-          <QueryClientProvider client={queryClient}>
-            <DarkModeContextProvider>
-              {/* <TabNavigator /> */}
-              <ParkingsTabNavigator />
-            </DarkModeContextProvider>
-          </QueryClientProvider>
-        </NavigationContainer>
-      </PaperProvider>
+      <PersistGate persistor={persistor}>
+        <PaperProvider theme={paperTheme}>
+          <NavigationContainer>
+            {/* <StackNavigator /> */}
+            <QueryClientProvider client={queryClient}>
+              <DarkModeContextProvider>
+                {/* <TabNavigator /> */}
+                <ParkingsTabNavigator />
+              </DarkModeContextProvider>
+            </QueryClientProvider>
+          </NavigationContainer>
+        </PaperProvider>
+      </PersistGate>
     </Provider>
   );
 }
